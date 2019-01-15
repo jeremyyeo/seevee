@@ -422,3 +422,6 @@ venv.bak/
 
 
 # End of https://www.gitignore.io/api/latex,python,pycharm
+
+.DS_Store
+.vscode/
