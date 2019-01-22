@@ -425,3 +425,6 @@ venv.bak/
 
 .DS_Store
 .vscode/
+**/*.csv
+**/*.tsv
+**/*.pt
