@@ -6,6 +6,7 @@ import re
 import json
 from pprint import pprint
 
+
 def simple_get(url):
     """
     Attempts to get the content at `url` by making an HTTP GET request.
@@ -20,7 +21,7 @@ def simple_get(url):
                 return None
 
     except RequestException as e:
-        log_error('Error during requests to {0} : {1}'.format(url, str(e)))
+        log_error("Error during requests to {0} : {1}".format(url, str(e)))
         return None
 
 
@@ -28,10 +29,12 @@ def is_good_response(resp):
     """
     Returns True if the response seems to be HTML, False otherwise.
     """
-    content_type = resp.headers['Content-Type'].lower()
-    return (resp.status_code == 200
-            and content_type is not None
-            and content_type.find('html') > -1)
+    content_type = resp.headers["Content-Type"].lower()
+    return (
+        resp.status_code == 200
+        and content_type is not None
+        and content_type.find("html") > -1
+    )
 
 
 def log_error(e):
@@ -42,7 +45,10 @@ def log_error(e):
     """
     print(e)
 
-response = simple_get("https://www.seek.co.nz/administrator-jobs/in-All-Wellington?sortmode=ListedDate")
+
+response = simple_get(
+    "https://www.seek.co.nz/administrator-jobs/in-All-Wellington?sortmode=ListedDate"
+)
 html = BeautifulSoup(response, "html.parser")
 
 for item in html.select("script"):
@@ -51,7 +57,7 @@ for item in html.select("script"):
         lines = item.get_text()
 
 # Split lines and tidy up empty lines.
-data = [line for line in lines.split('\n') if line.strip() != '']
+data = [line for line in lines.split("\n") if line.strip() != ""]
 print(data[0])
 print(data[1])
 
